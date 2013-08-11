@@ -557,18 +557,22 @@ ul.webstore-address,ul.webstore-contacts {
     border-color: #ccc #999 #999 #a8a8a8;
     border-style: solid;
     border-width: 1px;
-    padding: 2px;
-    width: 100%;
+    padding: 1px;
+    width: 300px;
 }
 
 .webstore-payment-button {
     margin-left: 0;
-    padding-top: 6px;
+    padding-top: 3px;
 }
 
 .webstore-payment td {
     vertical-align: middle;
     padding-right: 15px;
+}
+
+.webstore-payment-input-td .webstore-payment-input-error {
+  color: #66ffff;
 }
 
 .webstore-video,.webstore-calendar {

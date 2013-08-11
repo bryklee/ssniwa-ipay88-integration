@@ -3,10 +3,12 @@
   <head>
     <style type="text/css">@media print {  .gm-style .gmnoprint, .gmnoprint {    display:none  }}@media screen {  .gm-style .gmnoscreen, .gmnoscreen {    display:none  }}</style>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8">
-    <meta name="description" content="we are doing rental van that known as &quot;Van Sewa di Kuala Lumpur&quot;">
+    <meta name="description" content="We are doing rental van that known as &quot;Van Sewa di Kuala Lumpur&quot;">
     <title>Rental van in Kuala Lumpur - Payment</title>
     <link id="css" href="/css/main.css" rel="stylesheet">
     <link id="font" href="http://fonts.googleapis.com/css?family=Syncopate" rel="stylesheet" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="/js/jquery.validate.min.js"></script>
   </head>
   <body class="webstore-body">
     <div id="webstore-doc" class="webstore-doc">
@@ -78,31 +80,31 @@
                         <div class="webstore-content-decorator-top"></div>
                         <div class="webstore-content">
                           <div class="webstore-payment">
-                            <div id="payment_form">
-                              <table>
+                            <form id="payment_form" action="" method="post">
+                              <table style="width: 900px;">
                                 <tbody>
                                   <tr>
                                     <td class="webstore-payment-message-td">Name:</td>
                                     <td class="webstore-payment-input-td">
-                                      <input type="text" id="name" name="name" maxlength="200" class="webstore-payment-input">
+                                      <input type="text" id="name" name="name" size="200" maxlength="200" class="webstore-payment-input" required>                                      
                                     </td>
                                   </tr>
                                   <tr>
                                     <td class="webstore-payment-message-td">Phone:</td>
                                     <td class="webstore-payment-input-td">
-                                      <input type="text" id="phone" name="phone" maxlength="40" class="webstore-payment-input">
+                                      <input type="text" id="phone" name="phone" size="200" maxlength="40" class="webstore-payment-input" required>
                                     </td>
                                   </tr>
                                   <tr>
                                     <td class="webstore-payment-message-td">Email:</td>
                                     <td class="webstore-payment-input-td">
-                                      <input type="text" id="email" name="email" maxlength="100" class="webstore-payment-input">
+                                      <input type="text" id="email" name="email" size="200" maxlength="100" class="webstore-payment-input" required>
                                     </td>
                                   </tr>
                                   <tr>
                                     <td class="webstore-payment-message-td">Amount:</td>
                                     <td class="webstore-payment-input-td">
-                                      <input type="text" id="amount" name="amount" maxlength="20" class="webstore-payment-input">
+                                      <input type="text" id="amount" name="amount" size="200" maxlength="20" class="webstore-payment-input" required>
                                     </td>
                                   </tr>
                                   <tr><td><div style="min-height:20px;"></div></td><td></td></tr>
@@ -114,7 +116,7 @@
                                   </tr>
                                 </tbody>
                               </table>
-                            </div>
+                            </form>
                           </div>
                         </div>
                         <div class="webstore-content-decorator-bottom"></div>
@@ -158,4 +160,33 @@
     </div>
     <ins style="position: absolute !important; background-color: transparent !important; left: 986px !important; top: 104px !important; width: 32px !important; height: 20px !important; z-index: -10000 !important; display: none !important;"></ins>
   </body>
+  <script type="text/javascript">
+    jQuery(document).ready(function(){
+      jQuery.validator.addMethod("amountRegex", function(value, element) {
+        return this.optional(element) || /^\d{0,10}(\.\d{0,2})?$/.test(value); 
+      }, "Please enter a valid Amount.");
+      
+      jQuery("#payment_form").validate({
+        rules: {
+          phone: {
+            required: true,
+            digits: true
+          },
+          email: {
+            required: true,
+            email: true
+          },
+          amount: {
+            required: true,
+            amountRegex: true
+          }
+        },
+        errorPlacement: function(error, element) {
+          element.parent("td").append("<span class='webstore-payment-input-error'></span>");
+          var errSpan = element.next("span");
+          error.appendTo(errSpan);
+        }
+      });
+    });
+  </script>
 </html>
