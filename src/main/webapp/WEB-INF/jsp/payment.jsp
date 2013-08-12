@@ -80,7 +80,7 @@
                         <div class="webstore-content-decorator-top"></div>
                         <div class="webstore-content">
                           <div class="webstore-payment">
-                            <form id="payment_form" action="" method="post">
+                            <form id="payment_form" action="/checkout" method="post">
                               <table style="width: 900px;">
                                 <tbody>
                                   <tr>
@@ -102,7 +102,7 @@
                                     </td>
                                   </tr>
                                   <tr>
-                                    <td class="webstore-payment-message-td">Amount:</td>
+                                    <td class="webstore-payment-message-td">Amount(MYR):</td>
                                     <td class="webstore-payment-input-td">
                                       <input type="text" id="amount" name="amount" size="200" maxlength="20" class="webstore-payment-input" required>
                                     </td>
@@ -162,10 +162,14 @@
   </body>
   <script type="text/javascript">
     jQuery(document).ready(function(){
-      jQuery.validator.addMethod("amountRegex", function(value, element) {
-        return this.optional(element) || /^\d{0,10}(\.\d{0,2})?$/.test(value); 
+      jQuery.validator.addMethod("amountValidate", function(value, element) {
+        var result = this.optional(element) || (/^\d{0,10}(\.\d{0,2})?$/.test(value) && !(value == "."));
+        if( result && parseFloat(value) == 0 ) {
+          result = false;
+        }
+        return result; 
       }, "Please enter a valid Amount.");
-      
+            
       jQuery("#payment_form").validate({
         rules: {
           phone: {
@@ -178,7 +182,7 @@
           },
           amount: {
             required: true,
-            amountRegex: true
+            amountValidate: true
           }
         },
         errorPlacement: function(error, element) {
