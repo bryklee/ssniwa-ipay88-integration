@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ssniwa.common.Constant;
+import com.ssniwa.common.SignatureGenerator;
 
 @SuppressWarnings("serial")
 public class CheckoutServlet extends HttpServlet {
@@ -81,7 +82,7 @@ public class CheckoutServlet extends HttpServlet {
             req.setAttribute("UserContact", strPhone);
             req.setAttribute("Remark", "");
             req.setAttribute("Lang", Constant.lang);            
-            req.setAttribute("Signature", getSignatureInput(strRefNo, strAmount));
+            req.setAttribute("Signature", SignatureGenerator.generate(getSignatureInput(strRefNo, strAmount)));
             req.setAttribute("ResponseURL", Constant.responseURL);
             req.setAttribute("BackendURL", "");
 
