@@ -86,25 +86,25 @@
                                   <tr>
                                     <td class="webstore-payment-message-td">Name:</td>
                                     <td class="webstore-payment-input-td">
-                                      <input type="text" id="name" name="name" size="200" maxlength="200" class="webstore-payment-input" required>                                      
+                                      <input type="text" id="name" name="name" size="200" maxlength="200" class="webstore-payment-input" required />                                      
                                     </td>
                                   </tr>
                                   <tr>
                                     <td class="webstore-payment-message-td">Phone:</td>
                                     <td class="webstore-payment-input-td">
-                                      <input type="text" id="phone" name="phone" size="200" maxlength="40" class="webstore-payment-input" required>
+                                      <input type="text" id="phone" name="phone" size="200" maxlength="40" class="webstore-payment-input" required />
                                     </td>
                                   </tr>
                                   <tr>
                                     <td class="webstore-payment-message-td">Email:</td>
                                     <td class="webstore-payment-input-td">
-                                      <input type="text" id="email" name="email" size="200" maxlength="100" class="webstore-payment-input" required>
+                                      <input type="text" id="email" name="email" size="200" maxlength="100" class="webstore-payment-input" required />
                                     </td>
                                   </tr>
                                   <tr>
-                                    <td class="webstore-payment-message-td">Amount(MYR):</td>
+                                    <td class="webstore-payment-message-td">Amount (MYR):</td>
                                     <td class="webstore-payment-input-td">
-                                      <input type="text" id="amount" name="amount" size="200" maxlength="20" class="webstore-payment-input" required>
+                                      <input type="text" id="amount" name="amount" size="200" maxlength="20" class="webstore-payment-input" required />
                                     </td>
                                   </tr>
                                   <tr><td><div style="min-height:20px;"></div></td><td></td></tr>

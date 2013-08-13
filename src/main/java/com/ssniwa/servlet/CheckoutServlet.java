@@ -2,16 +2,20 @@ package com.ssniwa.servlet;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Random;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.ssniwa.common.Constant;
+
 @SuppressWarnings("serial")
 public class CheckoutServlet extends HttpServlet {
     
     private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,###,###,##0.00");
+    private static final Random RANDOM = new Random();
     
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
@@ -36,7 +40,7 @@ public class CheckoutServlet extends HttpServlet {
             String strPhone = req.getParameter("phone");
             strPhone = strPhone == null ? "" : strPhone.trim();
             if( !strPhone.matches("\\d+") ) {
-                throw new Exception("Post data is invalid: phone");
+                throw new Exception("Post data invalid: phone");
             }
             
             String strEmail = req.getParameter("email");
@@ -54,7 +58,7 @@ public class CheckoutServlet extends HttpServlet {
                     throw new Exception();
                 }
             }
-            catch(NumberFormatException nfex) {
+            catch(Exception e) {
                 throw new Exception("Post data invalid: amount");
             }
             try {
@@ -63,16 +67,55 @@ public class CheckoutServlet extends HttpServlet {
             catch(Exception e) {
                 throw new Exception("Post data failed to format: amount");
             }
+            
+            String strRefNo = getRefNo();
                         
-            req.setAttribute("name", strName);
-            req.setAttribute("phone", strPhone);
-            req.setAttribute("email", strEmail);
-            req.setAttribute("amount", strAmount);
+            req.setAttribute("MerchantCode", Constant.merchantKey);
+            req.setAttribute("PaymentId", "");
+            req.setAttribute("RefNo", strRefNo);
+            req.setAttribute("Amount", strAmount);
+            req.setAttribute("Currency", Constant.currency);
+            req.setAttribute("ProdDesc", Constant.prodDesc);
+            req.setAttribute("UserName", strName);
+            req.setAttribute("UserEmail", strEmail);
+            req.setAttribute("UserContact", strPhone);
+            req.setAttribute("Remark", "");
+            req.setAttribute("Lang", Constant.lang);            
+            req.setAttribute("Signature", getSignatureInput(strRefNo, strAmount));
+            req.setAttribute("ResponseURL", Constant.responseURL);
+            req.setAttribute("BackendURL", "");
+
             req.getRequestDispatcher("/WEB-INF/jsp/checkout.jsp").forward(req, resp);
         }
         catch(Throwable th) {
             resp.sendRedirect("http://s3.amazonaws.com/heroku_pages/error.html");
         }
+    }
+    
+    private String getRefNo() {
+        long lRandom = RANDOM.nextInt();
+        String random = lRandom < 0L ? String.valueOf(lRandom * (-1L)) : String.valueOf(lRandom);
+        while( random.length() < 2 ) {
+            random += random;
+        }
+        String refNo = random.substring(0, 2) + String.valueOf(System.currentTimeMillis());
+        return refNo.length() > 20 ? refNo.substring(0, 20) : refNo;
+    }
+    
+    private String getAmountForHash(String strAmount) {
+        String result = strAmount.replaceAll("\\.", "");
+        result = result.replaceAll(",", "");
+        return result;
+    }
+    
+    private String getSignatureInput(String strRefNo, String strAmount) {
+        StringBuffer sb = new StringBuffer();
+        sb.append(Constant.merchantKey);
+        sb.append(Constant.merchantCode);
+        sb.append(strRefNo);
+        sb.append(getAmountForHash(strAmount));
+        sb.append(Constant.currency);
+        return sb.toString();
     }
     
 }

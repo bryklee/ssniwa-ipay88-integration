@@ -538,7 +538,8 @@ ul.webstore-address,ul.webstore-contacts {
 }
 
 .webstore-payment .webstore-payment-message-td {
-    width: 5em;
+    width: 140px;
+    text-align: right;
 }
 
 .webstore-payment-error {
