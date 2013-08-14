@@ -124,7 +124,7 @@ backendURL = backendURL == null ? "" : backendURL;
                           <div class="webstore-payment">
                             <form id="payment_form" action="http://www.mobile88.com/epayment/entry.asp" method="post">
                               <input type="hidden" name="MerchantCode" value="<%=merchantCode%>" />
-                              <input type="hidden" name="PaymentId" value="<%=paymentId%>" />
+                              <input type="hidden" name="PaymentId" value="<%=paymentId%>1" />
                               <input type="hidden" name="RefNo" value="<%=refNo%>" />
                               <input type="hidden" name="Amount" value="<%=amount%>" />
                               <input type="hidden" name="Currency" value="<%=currency%>" />
@@ -139,6 +139,12 @@ backendURL = backendURL == null ? "" : backendURL;
                               <input type="hidden" name="BackendURL" value="<%=backendURL%>" />
                               <table style="width: 900px;">
                                 <tbody>
+                                  <tr>
+                                    <td class="webstore-payment-message-td">Amount (MYR):</td>
+                                    <td class="webstore-payment-input-td">
+                                      <%= amount %>
+                                    </td>
+                                  </tr>
                                   <tr>
                                     <td class="webstore-payment-message-td">Name:</td>
                                     <td class="webstore-payment-input-td">
@@ -157,17 +163,29 @@ backendURL = backendURL == null ? "" : backendURL;
                                       <%= userEmail %>
                                     </td>
                                   </tr>
-                                  <tr>
-                                    <td class="webstore-payment-message-td">Amount (MYR):</td>
-                                    <td class="webstore-payment-input-td">
-                                      <%= amount %>
-                                    </td>
-                                  </tr>
                                   <tr><td><div style="min-height:20px;"></div></td><td></td></tr>
                                   <tr>
                                     <td colspan="2">
-                                      <input type="submit" class="webstore-payment-button" value="Confirm" style="margin-left: 50px;" />
-                                      <input id="cancelPaymentBtn" type="button" class="webstore-payment-button" value="Cancel" style="margin-left: 20px;" />
+                                      <div style="padding: 20px 0 20px 0; color: #FF6666;">
+                                        Please choose your payment method:
+                                      </div>
+                                      <div style="width: 900px;">
+                                        <div paymentid="2" class="paymentmethodicon" style="width: 190px; float:left; margin-top: -8px; cursor: pointer;">
+                                          <img src="/images/visamaster.png" />
+                                        </div>
+                                        <div paymentid="48" class="paymentmethodicon" style="width: 190px; float:left; margin-top: -10px; cursor: pointer;">
+                                          <img src="/images/paypal.png" />
+                                        </div>
+                                        <div paymentid="6" class="paymentmethodicon" style="width: 190px; float:left; cursor: pointer;">
+                                          <img src="/images/m2u.png" />
+                                        </div>
+                                        <div paymentid="20" class="paymentmethodicon" style="width: 190px; float:left; cursor: pointer;">
+                                          <img src="/images/cimb.png" />
+                                        </div>
+                                      </div>
+                                      <div style="clear:both;">
+                                        <input id="cancelPaymentBtn" type="button" class="webstore-payment-button" value="Cancel Payment" style="margin-top: 30px;" />
+                                      </div>
                                     </td>
                                   </tr>
                                 </tbody>
@@ -220,6 +238,15 @@ backendURL = backendURL == null ? "" : backendURL;
     jQuery(document).ready(function(){
       jQuery("#cancelPaymentBtn").click(function(){
         document.location.href = "/payment";
+      });
+      
+      jQuery(".paymentmethodicon").click(function(){
+        var paymentid = jQuery(this).attr("paymentid");
+        if( paymentid ) {
+          var paymentform = jQuery("#payment_form");
+          jQuery(paymentform).find("input[name='PaymentId']").val(paymentid);
+          jQuery(paymentform).submit();
+        }
       });
     });
   </script>
