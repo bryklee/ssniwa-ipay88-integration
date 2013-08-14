@@ -572,7 +572,7 @@ ul.webstore-address,ul.webstore-contacts {
     padding-right: 15px;
 }
 
-.webstore-payment-input-td .webstore-payment-input-error {
+.webstore-payment-input-td {
   color: #66ffff;
 }
 

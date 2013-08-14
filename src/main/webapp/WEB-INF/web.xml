@@ -19,7 +19,7 @@
   </servlet>
   <servlet>
     <servlet-name>coresponse</servlet-name>
-    <jsp-file>/WEB-INF/jsp/coresponse.jsp</jsp-file>
+    <servlet-class>com.ssniwa.servlet.COResponseServlet</servlet-class>
   </servlet>
 
   <servlet-mapping>

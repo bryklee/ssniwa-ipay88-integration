@@ -1,8 +1,6 @@
 package com.ssniwa.servlet;
 
 import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.Enumeration;
 import java.util.Random;
 
 import javax.servlet.ServletException;
@@ -11,12 +9,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.ssniwa.common.Constant;
-import com.ssniwa.common.SignatureGenerator;
+import com.ssniwa.common.Util;
 
 @SuppressWarnings("serial")
 public class CheckoutServlet extends HttpServlet {
     
-    private static final DecimalFormat DECIMAL_FORMAT = new DecimalFormat("#,###,###,##0.00");
     private static final Random RANDOM = new Random();
     
     @Override
@@ -32,7 +29,7 @@ public class CheckoutServlet extends HttpServlet {
     }
     
     private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        try {            
+        try {
             String strName = req.getParameter("name");
             strName = strName == null ? "" : strName.trim().toUpperCase();
             if( "".equals(strName) ) {
@@ -64,7 +61,7 @@ public class CheckoutServlet extends HttpServlet {
                 throw new Exception("Post data invalid: amount");
             }
             try {
-                strAmount = DECIMAL_FORMAT.format(dAmount);
+                strAmount = Util.DECIMAL_FORMAT.format(dAmount);
             }
             catch(Exception e) {
                 throw new Exception("Post data failed to format: amount");
@@ -72,7 +69,7 @@ public class CheckoutServlet extends HttpServlet {
             
             String strRefNo = getRefNo();
                         
-            req.setAttribute("MerchantCode", Constant.merchantKey);
+            req.setAttribute("MerchantCode", Constant.merchantCode);
             req.setAttribute("PaymentId", "");
             req.setAttribute("RefNo", strRefNo);
             req.setAttribute("Amount", strAmount);
@@ -83,7 +80,7 @@ public class CheckoutServlet extends HttpServlet {
             req.setAttribute("UserContact", strPhone);
             req.setAttribute("Remark", "");
             req.setAttribute("Lang", Constant.lang);            
-            req.setAttribute("Signature", SignatureGenerator.generate(getSignatureInput(strRefNo, strAmount)));
+            req.setAttribute("Signature", Util.generateSignature(Util.getSignatureInputForRequest(strRefNo, strAmount)));
             req.setAttribute("ResponseURL", Constant.responseURL);
             req.setAttribute("BackendURL", "");
 
@@ -102,22 +99,6 @@ public class CheckoutServlet extends HttpServlet {
         }
         String refNo = random.substring(0, 2) + String.valueOf(System.currentTimeMillis());
         return refNo.length() > 20 ? refNo.substring(0, 20) : refNo;
-    }
-    
-    private String getAmountForHash(String strAmount) {
-        String result = strAmount.replaceAll("\\.", "");
-        result = result.replaceAll(",", "");
-        return result;
-    }
-    
-    private String getSignatureInput(String strRefNo, String strAmount) {
-        StringBuffer sb = new StringBuffer();
-        sb.append(Constant.merchantKey);
-        sb.append(Constant.merchantCode);
-        sb.append(strRefNo);
-        sb.append(getAmountForHash(strAmount));
-        sb.append(Constant.currency);
-        return sb.toString();
     }
     
 }

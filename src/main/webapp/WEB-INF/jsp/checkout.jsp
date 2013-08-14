@@ -51,7 +51,6 @@ backendURL = backendURL == null ? "" : backendURL;
     <link id="css" href="/css/main.css" rel="stylesheet">
     <link id="font" href="http://fonts.googleapis.com/css?family=Syncopate" rel="stylesheet" type="text/css">
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-    <script src="/js/jquery.validate.min.js"></script>
   </head>
   <body class="webstore-body">
     <div id="webstore-doc" class="webstore-doc">
@@ -168,7 +167,7 @@ backendURL = backendURL == null ? "" : backendURL;
                                   <tr>
                                     <td colspan="2">
                                       <input type="submit" class="webstore-payment-button" value="Confirm" style="margin-left: 50px;" />
-                                      <input type="button" class="webstore-payment-button" value="Cancel" style="margin-left: 20px;" />
+                                      <input id="cancelPaymentBtn" type="button" class="webstore-payment-button" value="Cancel" style="margin-left: 20px;" />
                                     </td>
                                   </tr>
                                 </tbody>
@@ -217,4 +216,11 @@ backendURL = backendURL == null ? "" : backendURL;
     </div>
     <ins style="position: absolute !important; background-color: transparent !important; left: 986px !important; top: 104px !important; width: 32px !important; height: 20px !important; z-index: -10000 !important; display: none !important;"></ins>
   </body>
+  <script type="text/javascript">
+    jQuery(document).ready(function(){
+      jQuery("#cancelPaymentBtn").click(function(){
+        document.location.href = "/payment";
+      });
+    });
+  </script>
 </html>
