@@ -74,7 +74,8 @@
                               String errDesc = request.getParameter("ErrDesc");
                               if( errDesc != null && !errDesc.equals("") ) {
                               %>
-                              Payment gateway responded: <%=errDesc%>
+                              Payment gateway responded error: <br/>
+                              <%=errDesc%>
                               <%
                               }
                               %>

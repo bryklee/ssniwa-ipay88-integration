@@ -14,12 +14,6 @@ import com.ssniwa.common.Util;
 public class COResponseServlet extends HttpServlet {
     
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-            throws ServletException, IOException {
-        process(req, resp);
-    }
-
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         process(req, resp);
@@ -27,6 +21,12 @@ public class COResponseServlet extends HttpServlet {
     
     private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         try {
+            String referer = req.getHeader("referer");
+            referer = referer == null ? "" : referer.trim().toLowerCase();
+            if( referer.indexOf(Constant.responseReferer) == -1 ) {
+                throw new Exception("Request header invalid referer");
+            }
+            
             String status = req.getParameter("Status");
             status = status == null ? "" : status.trim();
             if( "".equals(status) ) {

@@ -8,6 +8,7 @@ public class Constant {
     public static final String prodDesc = "Rental Van";
     public static final String lang = "UTF-8";
     public static final String responseURL = "http://ssniwa.herokuapp.com/coresponse";
+    public static final String responseReferer = "www.mobile88.com";
     
     public static final String RESP_STATUS_SUCCESS = "1";
     public static final String RESP_STATUS_FAIL = "0";
