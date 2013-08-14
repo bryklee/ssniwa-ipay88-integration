@@ -17,6 +17,10 @@
     <servlet-name>checkout</servlet-name>
     <servlet-class>com.ssniwa.servlet.CheckoutServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>coresponse</servlet-name>
+    <jsp-file>/WEB-INF/jsp/coresponse.jsp</jsp-file>
+  </servlet>
 
   <servlet-mapping>
     <servlet-name>hello</servlet-name>
@@ -29,6 +33,10 @@
   <servlet-mapping>
     <servlet-name>checkout</servlet-name>
     <url-pattern>/checkout</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>coresponse</servlet-name>
+    <url-pattern>/coresponse</url-pattern>
   </servlet-mapping>
 
   <welcome-file-list>

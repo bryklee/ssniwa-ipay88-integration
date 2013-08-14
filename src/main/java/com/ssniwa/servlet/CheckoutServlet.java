@@ -2,6 +2,7 @@ package com.ssniwa.servlet;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.Enumeration;
 import java.util.Random;
 
 import javax.servlet.ServletException;
@@ -31,7 +32,7 @@ public class CheckoutServlet extends HttpServlet {
     }
     
     private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        try {
+        try {            
             String strName = req.getParameter("name");
             strName = strName == null ? "" : strName.trim().toUpperCase();
             if( "".equals(strName) ) {
