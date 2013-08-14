@@ -173,9 +173,6 @@ backendURL = backendURL == null ? "" : backendURL;
                                         <div paymentid="2" class="paymentmethodicon" style="width: 190px; float:left; margin-top: -8px; cursor: pointer;">
                                           <img src="/images/visamaster.png" />
                                         </div>
-                                        <div paymentid="48" class="paymentmethodicon" style="width: 190px; float:left; margin-top: -10px; cursor: pointer;">
-                                          <img src="/images/paypal.png" />
-                                        </div>
                                         <div paymentid="6" class="paymentmethodicon" style="width: 190px; float:left; cursor: pointer;">
                                           <img src="/images/m2u.png" />
                                         </div>
