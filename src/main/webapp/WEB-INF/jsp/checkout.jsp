@@ -50,6 +50,9 @@ backendURL = backendURL == null ? "" : backendURL;
     <title>Rental van in Kuala Lumpur - Payment</title>
     <link id="css" href="/css/main.css" rel="stylesheet">
     <link id="font" href="http://fonts.googleapis.com/css?family=Syncopate" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+      {"parsetags": "explicit"}
+    </script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
   </head>
   <body class="webstore-body">
@@ -69,6 +72,14 @@ backendURL = backendURL == null ? "" : backendURL;
                           <p>
                             <font color="#ffffff"><b><font color="#66ffff">Cheapest Van / Car Rental in Kuala Lumpur Is Guarantied ..!!</font></b></font>
                           </p>
+                          <p><br/></p>
+                          <p>
+                            <div style="float: right; padding-left: 8px;">
+                              <div id="googleplusicon"></div>
+                            </div>
+                            <img class="img-right-inline" style="display: inline; float: right;" src="/images/car-rental.gif" height="50" width="284">                            
+                          </p>
+                          <p><br/></p>
                           <div class="clear"></div>
                         </div>
                       </div>
@@ -233,6 +244,11 @@ backendURL = backendURL == null ? "" : backendURL;
   </body>
   <script type="text/javascript">
     jQuery(document).ready(function(){
+      gapi.plusone.render("googleplusicon", {
+        "href": "http://www.rentalvan.com.my",
+        "size": "medium"
+      });
+      
       jQuery("#cancelPaymentBtn").click(function(){
         document.location.href = "/payment";
       });
