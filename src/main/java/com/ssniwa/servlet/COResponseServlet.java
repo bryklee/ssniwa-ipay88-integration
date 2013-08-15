@@ -14,12 +14,19 @@ import com.ssniwa.common.Util;
 public class COResponseServlet extends HttpServlet {
     
     @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
+        req.getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(req, resp);
+    }
+    
+    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
         process(req, resp);
     }
     
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        String urlToForward = null;
         try {
             String referer = req.getHeader("referer");
             referer = referer == null ? "" : referer.trim().toLowerCase();
@@ -97,11 +104,13 @@ public class COResponseServlet extends HttpServlet {
             req.setAttribute("RefNo", refNo);
             req.setAttribute("TransId", transId);
             req.setAttribute("Amount", strAmount);
-            req.getRequestDispatcher("/WEB-INF/jsp/coresponse.jsp").forward(req, resp);
-            return;
+            
+            urlToForward = "/WEB-INF/jsp/coresponse.jsp";
         }
         catch(Throwable th) {
-            resp.sendRedirect("http://s3.amazonaws.com/heroku_pages/error.html");
+            urlToForward = "/WEB-INF/jsp/error.jsp";
         }
+        
+        req.getRequestDispatcher(urlToForward).forward(req, resp);
     }
 }

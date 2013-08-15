@@ -19,7 +19,7 @@ public class CheckoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        resp.sendRedirect("http://s3.amazonaws.com/heroku_pages/error.html");
+        req.getRequestDispatcher("/WEB-INF/jsp/error.jsp").forward(req, resp);
     }
 
     @Override
@@ -28,7 +28,8 @@ public class CheckoutServlet extends HttpServlet {
         process(req, resp);
     }
     
-    private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    private void process(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        String urlToForward = null;
         try {
             String strName = req.getParameter("name");
             strName = strName == null ? "" : strName.trim().toUpperCase();
@@ -84,11 +85,13 @@ public class CheckoutServlet extends HttpServlet {
             req.setAttribute("ResponseURL", Constant.responseURL);
             req.setAttribute("BackendURL", "");
 
-            req.getRequestDispatcher("/WEB-INF/jsp/checkout.jsp").forward(req, resp);
+            urlToForward = "/WEB-INF/jsp/checkout.jsp";
         }
         catch(Throwable th) {
-            resp.sendRedirect("http://s3.amazonaws.com/heroku_pages/error.html");
+            urlToForward = "/WEB-INF/jsp/error.jsp";
         }
+        
+        req.getRequestDispatcher(urlToForward).forward(req, resp);
     }
     
     private String getRefNo() {

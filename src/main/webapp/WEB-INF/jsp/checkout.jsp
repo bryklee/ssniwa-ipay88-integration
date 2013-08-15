@@ -256,6 +256,9 @@ backendURL = backendURL == null ? "" : backendURL;
       jQuery(".paymentmethodicon").click(function(){
         var paymentid = jQuery(this).attr("paymentid");
         if( paymentid ) {
+          if( paymentid == "6" || paymentid == "20" ) {
+            alert("Please ensure your browser pop-up blocker has been disabled for the payment gateway");
+          }
           var paymentform = jQuery("#payment_form");
           jQuery(paymentform).find("input[name='PaymentId']").val(paymentid);
           jQuery(paymentform).submit();
