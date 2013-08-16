@@ -53,6 +53,10 @@ public class CheckoutServlet extends HttpServlet {
             strAmount = strAmount == null ? "" : strAmount.trim();
             double dAmount = 0;
             try {
+                if( strAmount.length() > 10 ) {
+                    throw new Exception();
+                }
+                
                 dAmount = Double.parseDouble(strAmount);
                 if( dAmount <= 0d ) {
                     throw new Exception();
