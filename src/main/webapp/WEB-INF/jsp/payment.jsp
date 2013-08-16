@@ -97,7 +97,7 @@
                                   <tr>
                                     <td class="webstore-payment-message-td">Amount (MYR):</td>
                                     <td class="webstore-payment-input-td">
-                                      <input type="text" id="amount" name="amount" size="200" maxlength="20" class="webstore-payment-input" required />
+                                      <input type="text" id="amount" name="amount" size="200" maxlength="10" class="webstore-payment-input" required />
                                     </td>
                                   </tr>
                                   <tr>
