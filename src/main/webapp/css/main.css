@@ -20,7 +20,7 @@ ul,li {
     margin: 0;
 }
 
-.webstore-html div,.webstore-html p,.webstore-html blockquote,.webstore-html ol,.webstore-html ul,.webstore-html dl,.webstore-html li,.webstore-html dt,.webstore-html dd,.webstore-html td,.webstore-html th {
+.webstore-html div,.webstore-html p,.webstore-html blockquote,.webstore-html ol,.webstore-html ul,.webstore-html dl,.webstore-html li,.webstore-html dt,.webstore-html dd {
     font-family: Syncopate;
 }
 
@@ -521,6 +521,11 @@ ul.webstore-address,ul.webstore-contacts {
     font-weight: bold;
 }
 
+.webstore-html .webstore-payment {
+    font-family: Tahoma;
+    font-size: medium;
+}
+
 .webstore-payment {
     max-width: 450px;
 }
@@ -565,6 +570,8 @@ ul.webstore-address,ul.webstore-contacts {
 .webstore-payment-button {
     margin-left: 0;
     padding-top: 3px;
+    font-family: Syncopate;
+    font-size: 80%;
 }
 
 .webstore-payment td {
@@ -574,6 +581,10 @@ ul.webstore-address,ul.webstore-contacts {
 
 .webstore-payment-input-td {
   color: #66ffff;
+}
+
+.webstore-payment-input-error {
+  font-size: 80%;
 }
 
 .webstore-video,.webstore-calendar {
@@ -1373,4 +1384,8 @@ dd {
 
 .webstore-editlink,.webstore-itemlink {
     color: #71c1ec!important;
+}
+
+.payment-font {
+  font-family: Tahoma;
 }
