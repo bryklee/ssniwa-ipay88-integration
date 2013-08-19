@@ -181,13 +181,13 @@ backendURL = backendURL == null ? "" : backendURL;
                                         Please choose your payment method:
                                       </div>
                                       <div style="width: 900px;">
-                                        <div paymentid="2" class="paymentmethodicon" style="width: 190px; float:left; margin-top: -8px; cursor: pointer;">
+                                        <div paymentid="2" class="paymentmethodicon" style="margin-top: -8px;">
                                           <img src="/images/visamaster.png" />
                                         </div>
-                                        <div paymentid="6" class="paymentmethodicon" style="width: 190px; float:left; cursor: pointer;">
+                                        <div paymentid="6" class="paymentmethodicon">
                                           <img src="/images/m2u.png" />
                                         </div>
-                                        <div paymentid="20" class="paymentmethodicon" style="width: 190px; float:left; cursor: pointer;">
+                                        <div paymentid="20" class="paymentmethodicon">
                                           <img src="/images/cimb.png" />
                                         </div>
                                       </div>
