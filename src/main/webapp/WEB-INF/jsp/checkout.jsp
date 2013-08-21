@@ -95,6 +95,53 @@ backendURL = backendURL == null ? "" : backendURL;
         </div>
       </div>
       <div class="webstore-main-corners"></div>
+      <div id="webstore-nav" class="webstore-nav">
+        <div class="webstore-panel">
+          <div class="webstore-panel-decorator-top"></div>
+          <div class="webstore-panel-decorator-content">
+            <div class="webstore-content-group">
+              <div class="webstore-content-group-decorator-top"></div>
+              <table width="100%" class="webstore-content-group-table">
+                <tbody>
+                  <tr>
+                    <td valign="top" class="webstore-content-group-table-td webstore-other-type-td" width="100%">
+                      <div class="webstore-content-decorator-top"></div>
+                      <div class="webstore-content">
+                        <div class="webstore-navigation">
+                          <ul>
+                            <li>
+                              <a href="http://www.rentalvan.com.my">Home</a>
+                            </li>
+                            <li>
+                              <a href="http://www.rentalvan.com.my/products">Rental Car List</a>
+                            </li>
+                            <li>
+                              <a href="http://www.rentalvan.com.my/Rental+Rules">Rental Procedure</a>
+                            </li>
+                            <li>
+                              <a href="http://www.rentalvan.com.my/contact+us">Contact Us</a>
+                            </li>
+                            <li>
+                              <a href="http://www.rentalvan.com.my/Rules+26+Regulations">Rules</a>
+                            </li>
+                            <li class="webstore-navigation-last selected">
+                              <a class="webstore-navigation-selected">Payment</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div class="webstore-content-decorator-bottom"></div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="webstore-content-group-decorator-bottom"></div>
+            </div>
+          </div>
+          <div class="webstore-panel-decorator-bottom"></div>
+        </div>
+      </div>      
+      <div class="webstore-main-corners"></div>
       <div id="webstore-main" class="webstore-main" style="min-height: 500px;">
         <div id="webstore-main-center" class="webstore-main-center no_sidebar">
           <div class="webstore-panel">

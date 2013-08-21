@@ -1228,7 +1228,7 @@ ul.webstore-address,ul.webstore-contacts {
     background-position: left top;
     padding: 0;
     line-height: 27px;
-    margin-left: 3px;
+    margin-left: -2px;
 }
 
 .webstore-navigation li.selected,.webstore-navigation li:hover {
