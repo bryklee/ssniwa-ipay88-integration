@@ -239,6 +239,27 @@
         "size": "medium"
       });
       
+      jQuery.support.placeholder = false;
+      var dummy = document.createElement('input');
+      if('placeholder' in dummy) jQuery.support.placeholder = true;
+      if(!jQuery.support.placeholder) {
+        var active = document.activeElement;
+        var text = jQuery('#payment_form :text');
+        text.focus(function () {
+          var el = jQuery(this);
+          if (el.attr('placeholder') != '' && el.val() == el.attr('placeholder')) {
+            el.val('').removeClass('hasPlaceholder');
+          }
+        }).blur(function () {
+          var el = jQuery(this);
+          if (el.attr('placeholder') != '' && (el.val() == '' || el.val() == el.attr('placeholder'))) {
+            el.val(el.attr('placeholder')).addClass('hasPlaceholder');
+          }
+        });
+        text.blur();
+        jQuery(active).focus();
+      }
+      
       jQuery.validator.addMethod("amountValidate", function(value, element) {
         var result = this.optional(element) || (/^\d{0,8}(\.\d{0,2})?$/.test(value) && !(value == "."));
         if( result && parseFloat(value) == 0 ) {
