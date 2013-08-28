@@ -1,6 +1,6 @@
-# SSNIWA iPay88 integration webapp
+# SSNIWA payment gateway integration webapp
 
-Simple webapp for ssniwa to integrate with iPay88 payment gateway
+Simple webapp for ssniwa to integrate with payment gateway
 
 ## Running the application locally
 
