@@ -146,25 +146,37 @@
                                   <tr>
                                     <td class="webstore-payment-message-td">Amount (MYR):</td>
                                     <td class="webstore-payment-input-td">
-                                      <input type="text" id="amount" name="amount" size="200" maxlength="10" class="webstore-payment-input" required />
+                                      <input type="text" id="amount" name="amount" maxlength="8" class="webstore-payment-input" placeholder="1.00" required />
                                     </td>
                                   </tr>
                                   <tr>
                                     <td class="webstore-payment-message-td">Name:</td>
                                     <td class="webstore-payment-input-td">
-                                      <input type="text" id="name" name="name" size="200" maxlength="200" class="webstore-payment-input" required />                                      
+                                      <input type="text" id="name" name="name" maxlength="200" class="webstore-payment-input" placeholder="John Smith" required />                                      
                                     </td>
                                   </tr>
                                   <tr>
                                     <td class="webstore-payment-message-td">Phone:</td>
                                     <td class="webstore-payment-input-td">
-                                      <input type="text" id="phone" name="phone" size="200" maxlength="40" class="webstore-payment-input" required />
+                                      <input type="text" id="phone" name="phone" maxlength="40" class="webstore-payment-input" placeholder="60123456789" required />
                                     </td>
                                   </tr>
                                   <tr>
                                     <td class="webstore-payment-message-td">Email:</td>
                                     <td class="webstore-payment-input-td">
-                                      <input type="text" id="email" name="email" size="200" maxlength="100" class="webstore-payment-input" required />
+                                      <input type="text" id="email" name="email" maxlength="100" class="webstore-payment-input" placeholder="email@example.com" required />
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="webstore-payment-message-td">Vehicle Type:</td>
+                                    <td class="webstore-payment-input-td">
+                                      <input type="text" id="vtype" name="vtype" maxlength="100" class="webstore-payment-input" placeholder="Nissan Urvan Van or Honda Civic or Proton Persona" required />
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="webstore-payment-message-td">Rental Period:</td>
+                                    <td class="webstore-payment-input-td">
+                                      <input type="text" id="period" name="period" size="200" maxlength="100" class="webstore-payment-input" placeholder="3 days from 11am on 25th Ogos 2013 to 28th Ogos 2013" required />
                                     </td>
                                   </tr>                                  
                                   <tr><td><div style="min-height:20px;"></div></td><td></td></tr>
@@ -228,12 +240,16 @@
       });
       
       jQuery.validator.addMethod("amountValidate", function(value, element) {
-        var result = this.optional(element) || (/^\d{0,10}(\.\d{0,2})?$/.test(value) && !(value == "."));
+        var result = this.optional(element) || (/^\d{0,8}(\.\d{0,2})?$/.test(value) && !(value == "."));
         if( result && parseFloat(value) == 0 ) {
           result = false;
         }
         return result; 
       }, "Please enter a valid Amount.");
+      
+      jQuery.validator.addMethod("amountMaxValue", function(value, element) {
+        return this.optional(element) || (parseFloat(value) <= 999999); 
+      }, "Amount cannot greater than 999999");
             
       jQuery("#payment_form").validate({
         rules: {
@@ -247,7 +263,8 @@
           },
           amount: {
             required: true,
-            amountValidate: true
+            amountValidate: true,
+            amountMaxValue: true
           }
         },
         errorPlacement: function(error, element) {

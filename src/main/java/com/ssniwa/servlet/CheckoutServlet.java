@@ -51,25 +51,52 @@ public class CheckoutServlet extends HttpServlet {
             
             String strAmount = req.getParameter("amount");
             strAmount = strAmount == null ? "" : strAmount.trim();
-            double dAmount = 0;
+            double dOriginalAmount = 0d;
+            double dAmount = 0d;
+            double dFee = 0d;
+            String strOriginalAmount = "";
+            String strFee = "";
             try {
-                if( strAmount.length() > 10 ) {
+                if( strAmount.length() > 8 ) {
                     throw new Exception();
                 }
                 
-                dAmount = Double.parseDouble(strAmount);
-                if( dAmount <= 0d ) {
+                dOriginalAmount = Double.parseDouble(strAmount);
+                if( dOriginalAmount <= 0d ) {
                     throw new Exception();
                 }
+                
+                if( dOriginalAmount >= 15d ) {
+                    dAmount = dOriginalAmount * 1.04d;
+                }
+                else {
+                    dAmount = dOriginalAmount + 0.6d;
+                }
+                
+                dFee = dAmount - dOriginalAmount;
             }
             catch(Exception e) {
                 throw new Exception("Post data invalid: amount");
             }
             try {
                 strAmount = Util.DECIMAL_FORMAT.format(dAmount);
+                strOriginalAmount = Util.DECIMAL_FORMAT.format(dOriginalAmount);
+                strFee = Util.DECIMAL_FORMAT.format(dFee);
             }
             catch(Exception e) {
                 throw new Exception("Post data failed to format: amount");
+            }
+            
+            String strProdDesc = req.getParameter("vtype");
+            strProdDesc = strProdDesc == null ? "" : strProdDesc.trim();
+            if( "".equals(strProdDesc) ) {
+                throw new Exception("Post data invalid: vtype");
+            }
+            
+            String strPeriod = req.getParameter("period");
+            strPeriod = strPeriod == null ? "" : strPeriod.trim();
+            if( "".equals(strPeriod) ) {
+                throw new Exception("Post data invalid: period");
             }
             
             String strRefNo = getRefNo();
@@ -79,15 +106,17 @@ public class CheckoutServlet extends HttpServlet {
             req.setAttribute("RefNo", strRefNo);
             req.setAttribute("Amount", strAmount);
             req.setAttribute("Currency", Constant.currency);
-            req.setAttribute("ProdDesc", Constant.prodDesc);
+            req.setAttribute("ProdDesc", strProdDesc);
             req.setAttribute("UserName", strName);
             req.setAttribute("UserEmail", strEmail);
             req.setAttribute("UserContact", strPhone);
-            req.setAttribute("Remark", "");
+            req.setAttribute("Remark", strPeriod);
             req.setAttribute("Lang", Constant.lang);            
             req.setAttribute("Signature", Util.generateSignature(Util.getSignatureInputForRequest(strRefNo, strAmount)));
             req.setAttribute("ResponseURL", Constant.responseURL);
             req.setAttribute("BackendURL", "");
+            req.setAttribute("OriginalAmount", strOriginalAmount);
+            req.setAttribute("Fee", strFee);
 
             urlToForward = "/WEB-INF/jsp/checkout.jsp";
         }

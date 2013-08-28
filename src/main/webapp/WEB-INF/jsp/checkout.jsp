@@ -40,6 +40,12 @@ responseURL = responseURL == null ? "" : responseURL;
 
 String backendURL = (String)request.getAttribute("BackendURL");
 backendURL = backendURL == null ? "" : backendURL;
+
+String originalAmount = (String)request.getAttribute("OriginalAmount");
+originalAmount = originalAmount == null ? "" : originalAmount;
+
+String fee = (String)request.getAttribute("Fee");
+fee = fee == null ? "" : fee;
 %>
 <!DOCTYPE html>
 <html class="webstore-html">
@@ -198,27 +204,51 @@ backendURL = backendURL == null ? "" : backendURL;
                               <table style="width: 900px;">
                                 <tbody>
                                   <tr>
-                                    <td class="webstore-payment-message-td">Amount (MYR):</td>
+                                    <td class="webstore-payment-message-td webstore-payment-message-td-checkout">Amount (MYR):</td>
+                                    <td class="webstore-payment-input-td">
+                                      <%= originalAmount %>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="webstore-payment-message-td webstore-payment-message-td-checkout">Transaction Fee (MYR):</td>
+                                    <td class="webstore-payment-input-td">
+                                      <%= fee %>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="webstore-payment-message-td webstore-payment-message-td-checkout">Total Amount (MYR):</td>
                                     <td class="webstore-payment-input-td">
                                       <%= amount %>
                                     </td>
                                   </tr>
                                   <tr>
-                                    <td class="webstore-payment-message-td">Name:</td>
+                                    <td class="webstore-payment-message-td webstore-payment-message-td-checkout">Name:</td>
                                     <td class="webstore-payment-input-td">
                                       <%= userName %>                                      
                                     </td>
                                   </tr>
                                   <tr>
-                                    <td class="webstore-payment-message-td">Phone:</td>
+                                    <td class="webstore-payment-message-td webstore-payment-message-td-checkout">Phone:</td>
                                     <td class="webstore-payment-input-td">
                                       <%= userContact %>
                                     </td>
                                   </tr>
                                   <tr>
-                                    <td class="webstore-payment-message-td">Email:</td>
+                                    <td class="webstore-payment-message-td webstore-payment-message-td-checkout">Email:</td>
                                     <td class="webstore-payment-input-td">
                                       <%= userEmail %>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="webstore-payment-message-td webstore-payment-message-td-checkout">Vehicle Type:</td>
+                                    <td class="webstore-payment-input-td">
+                                      <%= prodDesc %>
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="webstore-payment-message-td webstore-payment-message-td-checkout">Rental Period:</td>
+                                    <td class="webstore-payment-input-td">
+                                      <%= remark %>
                                     </td>
                                   </tr>
                                   <tr><td><div style="min-height:20px;"></div></td><td></td></tr>
